@@ -1,5 +1,6 @@
 import streamlit as st 
-import re 
+import re
+import json 
 
 from data import Literature, Chapter, Summary
 
@@ -18,9 +19,22 @@ if ("literature" not in st.session_state):
 literature = st.session_state.literature
 
 # ====
-# Left Panel 
+# Left Panel -- rendering before the main panel  
 # ====
 with st.sidebar:
+    # Literature upload 
+    upload_literature = st.file_uploader(
+        label="上傳", 
+        accept_multiple_files=False
+    )
+    if (upload_literature): 
+        literature_json = json.loads(upload_literature.getvalue().decode())
+        literature = Literature.parse_obj(literature_json)
+        st.session_state.literature = literature
+
+    # Divider line 
+    st.divider() 
+
     # New chapter button 
     create_new_chapter = st.button(label="新章節")
     if (create_new_chapter): 
@@ -56,7 +70,23 @@ if (chapter is not None):
     ch_content = st.text_area(label="Story", value=chapter.content)
     chapter.content = ch_content
 
+    # function buttons 
 
-logging.info(f"DEBUG {st.session_state.literature.dict()}")
+    # summary container 
+    
 
+# ====
+# Left Panel -- rendering after the main panel  
+# ====
+with st.sidebar:
+    # Divider line 
+    st.divider() 
+
+    # Download button 
+    download_literatur = st.download_button(
+        label="下載", 
+        data=json.dumps(literature.dict(), indent=4), 
+        file_name="literature.json", 
+        mime="application/json"
+    )    
 
