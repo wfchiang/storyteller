@@ -14,8 +14,8 @@ export function ComponentChaptersPanel (props :ComponentChaptersPanelProps) {
         let newCh :Chapter = {
             caption: "", 
             characters: {}, 
-            content: [], 
-            summary: []
+            content: "", 
+            summary: ""
         }; 
         let newChapters = [...props.story.chapters, newCh]; 
         props.setStory({

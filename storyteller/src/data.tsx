@@ -1,8 +1,8 @@
 export interface Chapter {
     caption :string; 
     characters : { [name :string]: string[] }; 
-    content :string[]; 
-    summary :string[]; 
+    content :string; 
+    summary :string; 
 }
 
 
