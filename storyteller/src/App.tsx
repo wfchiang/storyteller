@@ -3,6 +3,7 @@ import './App.css';
 import { Story } from './data';
 import { ComponentChaptersPanel } from './ComponentChaptersPanel';
 import { ComponentMainEditor } from './ComponentMainEditor';
+import { ComponentTitleAndCaption } from './ComponentTitleAndCaptionPanel';
 
 function App() {
   // Set the OpenAI API Key 
@@ -19,17 +20,6 @@ function App() {
 
   // Get the state of the selected chapter ID 
   const [selectedChapterId, setSelectedChapterId] = useState(-1); 
-
-  // Function for updating the OpenAI API Key 
-  const updateOpenaiApiKey = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setOpenaiApiKey(event.target.value.trim()); 
-  }; 
-
-  // Function for updating the story title 
-  const onChangeStoryTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStory({...story, title: event.target.value.trim()}); 
-    console.log(story); 
-  }; 
 
   // Function for handling uploaded JSON story
   const handleUploadedJsonStory = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +64,8 @@ function App() {
         <div style={{display: "flex"}}>
           <p>OpenAI API Key:</p>
           <p>&nbsp;&nbsp;</p>
-          <input id="input_openai_api_key" type="text" value={openaiApiKey} onChange={updateOpenaiApiKey} />
+          <input id="input_openai_api_key" type="text" value={openaiApiKey} 
+            onChange={(e) => setOpenaiApiKey(e.target.value.trim())} />
         </div>
 
         <hr/>
@@ -98,17 +89,17 @@ function App() {
 
       <div id="div_main_editor_panel" className="top-level-panel">
         {/* Title panel */}
-        <div id="div_title" style={{display: "flex"}}>
-          <h1>Title</h1>
-          <p>&nbsp;&nbsp;</p>
-          <input className="title-input" type="text" value={story.title} onChange={onChangeStoryTitle} />
-        </div>
-
+        <ComponentTitleAndCaption
+          chapterId={selectedChapterId} 
+          story={story}
+          setStory={setStory}
+        ></ComponentTitleAndCaption>
+        
         <hr/>
 
         {/* Main editor */}
         <ComponentMainEditor
-          idChapter={selectedChapterId} 
+          chapterId={selectedChapterId} 
           story={story}
           setStory={setStory}
         ></ComponentMainEditor>
