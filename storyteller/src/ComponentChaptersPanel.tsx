@@ -12,10 +12,9 @@ export interface ComponentChaptersPanelProps {
 export function ComponentChaptersPanel (props :ComponentChaptersPanelProps) {
     const addNewChapter = () => {
         let newCh :Chapter = {
-            caption: "", 
-            characters: {}, 
+            caption: "",  
             content: "", 
-            summary: ""
+            characterSummaries :{}
         }; 
         let newChapters = [...props.story.chapters, newCh]; 
         props.setStory({
@@ -33,9 +32,9 @@ export function ComponentChaptersPanel (props :ComponentChaptersPanelProps) {
             }}
         >
             <h3>Chapters</h3>
-            {props.story.chapters.map((chapter, idChapter) => (
+            {props.story.chapters.map((chapter, chapterId) => (
                 <ComponentChapterTab
-                    idChapter={idChapter}
+                    chapterId={chapterId}
                     story={props.story}
                     setStory={props.setStory}
                     setSelectedChapterId={props.setSelectedChapterId}

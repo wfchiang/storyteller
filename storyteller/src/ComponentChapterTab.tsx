@@ -2,7 +2,7 @@ import { Chapter, Story } from "./data";
 
 
 export interface ComponentChapterTabProps {
-    idChapter :number; 
+    chapterId :number; 
     story :Story; 
     setStory: (newStory :Story) => void; 
     setSelectedChapterId: (selectedChapterId :number) => void;  
@@ -10,15 +10,15 @@ export interface ComponentChapterTabProps {
 
 
 export function ComponentChapterTab (props :ComponentChapterTabProps) {
-    let chapter :Chapter = props.story.chapters[props.idChapter]; 
+    let chapter :Chapter = props.story.chapters[props.chapterId]; 
 
     const selectChapter = () => {
-        props.setSelectedChapterId(props.idChapter); 
+        props.setSelectedChapterId(props.chapterId); 
     }; 
 
     return (
         <div 
-            id={`div_chapter_tab_${props.idChapter}`} 
+            id={`div_chapter_tab_${props.chapterId}`} 
             style={{
                 display: "flex", 
                 marginTop: "5px", 
@@ -26,7 +26,7 @@ export function ComponentChapterTab (props :ComponentChapterTabProps) {
             }}
             onClick={selectChapter}
         >
-            <p>第 {props.idChapter + 1} 章:&nbsp;&nbsp;{chapter.caption}</p>
+            <p>第 {props.chapterId + 1} 章:&nbsp;&nbsp;{chapter.caption}</p>
         </div>
     ); 
 }; 
