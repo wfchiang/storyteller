@@ -25,6 +25,9 @@ function App() {
   const initChatHistory :ChatMessage[] = []; 
   const [chatHistory, setChatHistory] = useState(initChatHistory); 
 
+  // Selected model name 
+  const [selectedModelName, setSelectedModelName] = useState("gpt-4-turbo"); 
+
   // Rendering 
   return (
     <div 
@@ -40,6 +43,7 @@ function App() {
           story={story} setStory={setStory}
           setSelectedChapterId={setSelectedChapterId} 
           chatHistory={chatHistory} setChatHistory={setChatHistory}
+          selectedModelName={selectedModelName} setSelectedModelName={setSelectedModelName}
         ></ComponentSideOperationPanel>
       </div>
 

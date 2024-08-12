@@ -3,6 +3,7 @@ import { Chapter, Story } from "./data";
 
 
 export interface ComponentChaptersPanelProps {
+    display :string; 
     story :Story; 
     setStory: (newStory :Story) => void; 
     setSelectedChapterId: (selectedChapterId :number) => void;  
@@ -27,11 +28,10 @@ export function ComponentChaptersPanel (props :ComponentChaptersPanelProps) {
         <div 
             id="div_chapters_panel"
             style={{
-                display: "flex", 
+                display: props.display, 
                 flexDirection: "column"
             }}
         >
-            <h3>Chapters</h3>
             {props.story.chapters.map((chapter, chapterId) => (
                 <ComponentChapterTab
                     chapterId={chapterId}
