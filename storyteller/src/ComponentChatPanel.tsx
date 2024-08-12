@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { ChatMessage } from "./data";
+import { ComponentSideOperationPanelProps } from "./ComponentSideOperationPanel"
 
 
-export interface ComponentChatPanelProps {
+export interface ComponentChatPanelProps extends ComponentSideOperationPanelProps{
     display :string; 
-    openaiApiKey :string; 
-    chatHistory :ChatMessage[]; 
-    setChatHistory : (newChatHistory :ChatMessage[]) => void; 
-    selectedModelName :string; 
-    setSelectedModelName : (newSelectedModelName :string) => void; 
 }; 
 
 
@@ -65,6 +61,11 @@ export function ComponentChatPanel (props :ComponentChatPanelProps) {
             });
     }; 
 
+    const autoGenerateStoryContent = () => {
+        let prompt = `我正在寫小說的一個章節。請根據以下提供的本章節大綱，書寫詳盡內容。\n\n大綱: ${props.chapterIdea}`;
+        askLLM(prompt);  
+    }; 
+
     return (
         <div id="div_chat_panel" style={{display: props.display, flexDirection: "column"}}>
             {/* LLM Response */}
@@ -75,7 +76,10 @@ export function ComponentChatPanel (props :ComponentChatPanelProps) {
             ></textarea>
             
             {/* User Prompt */}
-            <p>User:</p>
+            <div style={{display: "flex"}}>
+                <p>User:&nbsp;&nbsp;</p>
+                <button id="button_auto_generate_content" onClick={autoGenerateStoryContent}>根據故事大綱生成內容</button>
+            </div>
             <textarea id="textarea_user_prompt"
                 rows={5}
                 value={userPrompt}

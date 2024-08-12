@@ -18,6 +18,9 @@ function App() {
 
   const [story, setStory] = useState(initStory); 
 
+  // Get the chapter idea 
+  let [chapterIdea, setChapterIdea] = useState(""); 
+
   // Get the state of the selected chapter ID 
   const [selectedChapterId, setSelectedChapterId] = useState(-1); 
 
@@ -41,7 +44,8 @@ function App() {
         <ComponentSideOperationPanel 
           openaiApiKey={openaiApiKey} setOpenaiApiKey={setOpenaiApiKey} 
           story={story} setStory={setStory}
-          setSelectedChapterId={setSelectedChapterId} 
+          chapterId={selectedChapterId} setSelectedChapterId={setSelectedChapterId} 
+          chapterIdea={chapterIdea} setChapterIdea={setChapterIdea}
           chatHistory={chatHistory} setChatHistory={setChatHistory}
           selectedModelName={selectedModelName} setSelectedModelName={setSelectedModelName}
         ></ComponentSideOperationPanel>
@@ -60,8 +64,8 @@ function App() {
         {/* Main editor */}
         <ComponentMainEditor
           chapterId={selectedChapterId} 
-          story={story}
-          setStory={setStory}
+          story={story} setStory={setStory}
+          chapterIdea={chapterIdea} setChapterIdea={setChapterIdea}
         ></ComponentMainEditor>
         
       </div>

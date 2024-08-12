@@ -7,12 +7,13 @@ export interface ComponentMainEditorProps {
     chapterId: number;
     story: Story;
     setStory: (newStory: Story) => void;
+    chapterIdea :string; 
+    setChapterIdea : (newChapterIdea :string) => void; 
 }; 
 
 
 export function ComponentMainEditor (props :ComponentMainEditorProps) {
     let [newSummaryForCharName, setNewSummaryForCharName] = useState(""); 
-    let [chapterIdea, setChapterIdea] = useState(""); 
 
     let currentChapter :Chapter | undefined = props.story.chapters[props.chapterId]; 
 
@@ -25,7 +26,7 @@ export function ComponentMainEditor (props :ComponentMainEditorProps) {
     }; 
 
     const updateChapterIdea = (event :React.ChangeEvent<HTMLTextAreaElement>) => {
-        setChapterIdea(event.target.value); 
+        props.setChapterIdea(event.target.value); 
     }; 
 
     const updateChapterContent = (event :React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -62,7 +63,7 @@ export function ComponentMainEditor (props :ComponentMainEditorProps) {
                             <h3>故事大綱/走向</h3>
                             <textarea 
                                 id="textarea_chapter_idea" 
-                                value={chapterIdea}
+                                value={props.chapterIdea}
                                 rows={10} 
                                 cols={60}
                                 onChange={updateChapterIdea}

@@ -4,17 +4,14 @@ import { ComponentOpenAiKeyPanel } from './ComponentOpenAiKeyPanel';
 import { ComponentStoryIO } from './ComponentStoryIO';
 import { ComponentChaptersPanel } from './ComponentChaptersPanel';
 import { ComponentChatPanel } from './ComponentChatPanel';
+import { ComponentMainEditorProps } from './ComponentMainEditor';
 import { useState } from 'react';
 
 
-export interface ComponentSideOperationPanelProps {
+export interface ComponentSideOperationPanelProps extends ComponentMainEditorProps{
     // OpenAI API Key
     openaiApiKey :string; 
     setOpenaiApiKey : (newOpenaiApiKey :string) => void; 
-
-    // Story 
-    story: Story;
-    setStory: (newStory: Story) => void;
 
     // Set selected chapter ID 
     setSelectedChapterId : (newSelectedChapterId :number) => void; 
@@ -64,8 +61,11 @@ export function ComponentSideOperationPanel (props :ComponentSideOperationPanelP
             <h3 onClick={() => {return (chatDisplay==="flex" ? setChatDisplay("none") : setChatDisplay("flex"));}}>Chat</h3>
             <ComponentChatPanel
                 display={chatDisplay}
-                openaiApiKey={props.openaiApiKey}
+                chapterId={props.chapterId} setSelectedChapterId={props.setSelectedChapterId}
+                openaiApiKey={props.openaiApiKey} setOpenaiApiKey={props.setOpenaiApiKey}
+                story={props.story} setStory={props.setStory}
                 chatHistory={props.chatHistory} setChatHistory={props.setChatHistory}
+                chapterIdea={props.chapterIdea} setChapterIdea={props.setChapterIdea}
                 selectedModelName={props.selectedModelName} setSelectedModelName={props.setSelectedModelName}
             ></ComponentChatPanel>
         </div>
