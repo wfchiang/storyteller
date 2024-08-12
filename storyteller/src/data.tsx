@@ -1,3 +1,9 @@
+export interface ChatMessage {
+    role :string;
+    content :string; 
+};
+
+
 export interface Chapter {
     caption :string; 
     content :string; 
@@ -22,7 +28,7 @@ export interface UpdateStoryChapterParams {
 
 export function updateStoryChapter (params :UpdateStoryChapterParams) {
     let newChapters = params.story.chapters.map((ch, iCh) => {
-        if (iCh == params.chapterId) {
+        if (iCh === params.chapterId) {
             return params.updatedChapter;
         } else {
             return ch; 
